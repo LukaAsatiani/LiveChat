@@ -23,4 +23,8 @@ class User extends Authenticatable{
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function rooms(){
+        return $this->hasManyThrough(Room::class, RoomUserConnector::class, 'user_id', 'id', 'id', 'room_id')->orderBy('created_at', 'asc');;
+    }
 }
